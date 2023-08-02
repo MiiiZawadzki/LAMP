@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  www:
+    container_name: 'lamp_www'
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /var/www
+    ports:
+      - 80:80
+    volumes:
+      - ./htdocs:/var/www
+
+  db:
+    image: mariadb:10.4.17
+    container_name: 'lamp_db'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+networks:
+  default:
+    external: true
+    name: dev

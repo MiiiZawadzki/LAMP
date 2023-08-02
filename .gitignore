@@ -1,0 +1,17 @@
+# System files
+.DS_Store
+
+# IDE files
+/.idea
+/.vscode
+
+# env file with config
+.env
+
+# apache configs
+sites/*
+!sites/000-default.conf
+
+# projects files
+htdocs/*
+!htdocs/index.php
