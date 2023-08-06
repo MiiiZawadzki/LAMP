@@ -9,6 +9,7 @@ services:
     working_dir: /var/www
     ports:
       - 80:80
+      - 5173:5173
     volumes:
       - ./htdocs:/var/www
 
@@ -20,7 +21,10 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - db-volume:/var/lib/mysql
+
+volumes:
+  db-volume:
 
 networks:
   default:

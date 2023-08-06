@@ -17,6 +17,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
       sudo \
       libzip-dev \
       wget \
+      nodejs \
+      npm \
       librabbitmq-dev \
     && pecl install amqp \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
@@ -38,12 +40,10 @@ RUN docker-php-ext-install pdo mysqli pdo_mysql zip;
 COPY sites/000-default.conf /etc/apache2/sites-available/
 COPY apache2.conf /etc/apache2/apache2.conf
 
-# EXPOSE 80 587 ???
+EXPOSE 5173
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/bin/composer
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
 
 RUN a2enmod rewrite headers && service apache2 restart
 
